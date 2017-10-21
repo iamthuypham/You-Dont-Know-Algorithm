@@ -1,36 +1,31 @@
 ## Level 2
 #### Human
-Find *fruit products* in *a basket*
+Find *some fruit products* from *a store*
 
 Find *all iPhones and Android watches location* in *a building*
 
 Find *all customers whose age from 25 to 34* from *a store members list*
 
-#### Tricky human
-Find *matching products* in *customer 1 and customer 2's baskets* 
-
 #### Robot
 Find **i** (items) which are existed in both **mess1** and **mess2**
 
 #### Example
-
 Input:
 ```
 var groceryList = ["apple", "watermelon"]
-var store = ["apple", "banana", "chicken", "icecream", "cucumber"]
+var store = ["apple", "banana", "chicken", "cucumber", "icecream",..., "water", "watermelon"]
 ```
 Output:
 ```
-["apple", "banana"]
+["apple", "watermelon"]
 ```
 
 #### Let's Analyze
-
 Whenever finding multiple items, that means we have (sort of) two arrays:
 - Items we look for
 - Items from (some kind of) resources
 
-For example, *buy some fruit products from a store*
+For the example *buy some fruit products from a store*
 - Items we look for: any fruit product
 - Items from resources: all products in our basket
 
@@ -54,51 +49,59 @@ Yes, what if there is none apple in the store and our robot still goes to the Fr
 
 *"Alright, so we sort items in the grocery list by their locations and check whether each item is sold out with a store employee. Skip the item if it is sold out"*
 
-We will never stop saying "what if" because we are human and we have our unique needs.
+#### Conclusion
+1. "What if" question helps us to explore rare cases or new areas of a problem. Answering "what if" question by adding more conditions to the solution is not an effective approach. **We need a dynamic solution**
 
-Now it is good to use robot to memorize all conditions and follow the steps we did. 
-But it is not smart to tell them duplicate our inefficiency.
+2.  It is good to use robot to memorize all conditions and follow the steps we did. But it is not smart to tell them duplicate our inefficiency. Our ultimate goal is **reducing time and effort for robot**, *not* **by robot**
 
-Our ultimate goal is reducing time and effort by combining technology and useful data.
+*How do we accomplish that?*
 
-*"Ok, so what will we do?."*
-
-**Tell a robot/AI buy some fruit products from an online store**
+#### Method 1: **Tell a robot go shopping online**
 - Scan the grocery list and open the store website (of course!)
 - Click on Fruits section and sort products by name
 - Read first item "apple"
-- Page shows first product as "apple"
+- Scan each item 's name until reach "apple"
 - Add to cart and checkmark
-- Read second item "watermelon" and **think "watermelon" is not likely to be on page 2**
-- Click on the second page from the last one
-- Click on next or previous page of the current page to find "watermelon"
+- Read second item "watermelon"
+- Scan next items 's name until reach "watermelon"
+- Add to cart and checkmark
 
-See a different?
+**Why this method?**
+We don't have to worry about items' location or whether they are sold out or others "what if". It is a dynamic solution.
 
-*"How can a robot/AI know that "watermelon" is not likely to be on page 2?"*
-
-Yub, that's why we use algorithm.
-
-#### Method
-
-(below code is in editing progress)
 ```
-def printIntersection(arr1, arr2, m, n):
-    i,j = 0,0
-    while i < m and j < n:
-        if arr1[i] < arr2[j]:
+var m = groceryList.length
+var n = store.length
+function find(groceryList, store, m, n) {
+    var i = 0
+    var j = 0
+    while (i < m and j < n) {
+        if groceryList[i] < store[j] {
             i += 1
-        elif arr2[j] < arr1[i]:
+        } else if (store[j] < groceryList[i]) {
             j+= 1
-        else:
-            print(arr2[j])
+        } else {
+            print(store[j])
             j += 1
             i += 1
- 
-# Driver program to test above function
-arr1 = [1, 2, 4, 5, 6]
-arr2 = [2, 3, 5, 7]
-m = len(arr1)
-n = len(arr2)
-printIntersection(arr1, arr2, m, n)
+        }
+    }
+}
+// Complexity
+// Speed: O(m+n)
 ```
+
+**A robot can do better!**
+In this method, our robot scans each item 's name. When we, as a  human, we know "watermelon" **is not likely** next to "apple" and we usually skip to end of the page. How can our robot know **"watermelon" is not likely next to "apple"** ?
+
+#### Method 2: **Tell a robot to think**
+...
+- Read second item "watermelon"
+- Find a product which is right at middle of the page. Let's say "milk"
+- Think "watermelon" is after "milk"
+- Find a product which is right at middle between "milk" and end of the page. Let's say "raisin"
+- Think "watermelon" is after "raisin"
+...
+
+
+
