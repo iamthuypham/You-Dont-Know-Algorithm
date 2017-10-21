@@ -101,7 +101,30 @@ In this method, our robot scans each item 's name. When we, as a  human, we know
 - Think "watermelon" is after "milk"
 - Find a product which is right at middle between "milk" and end of the page. Let's say "raisin"
 - Think "watermelon" is after "raisin"
+(continue)
 ...
+```
+var m = groceryList.length
+var n = store.length
 
+function find(groceryList, store, m, n) {
+    var i = 0
+    var mid = Math.ceil((n - 1)/2)
+    
+    while (i < m) {        
+        if (groceryList[i] < store[mid]) {
+            mid = Math.floor(mid / 2)
+        } else if (groceryList[i] > store[mid]) {
+            mid = Math.ceil((n - mid) / 2) + mid
+        } else {
+            console.log(store[mid])
+            i += 1
+        }
+    }
+}
+
+// Complexity:
+// Speed: O(min(mLogn, nLogm))
+```
 
 
