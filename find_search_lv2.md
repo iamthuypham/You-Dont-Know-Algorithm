@@ -2,12 +2,12 @@
 #### Human
 Find *some fruit products* from *a store*
 
-Find *all iPhones and Android watches location* in *a building*
+Find *some tablet devices* in *a building*
 
-Find *all customers whose age from 25 to 34* from *a store members list*
+Find *some customers* from *a store members list*
 
 #### Robot
-Find **i** (items) which are existed in both **mess1** and **mess2**
+Find **i** (items) which are existed in both **list** (small) and **mess** (large, infinitive)
 
 #### Example
 Input:
