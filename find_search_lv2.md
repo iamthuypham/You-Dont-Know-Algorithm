@@ -127,4 +127,5 @@ function find(groceryList, store, m, n) {
 // Speed: O(min(mLogn, nLogm))
 ```
 
-
+---
+[Next: Find & Search Level 3](https://github.com/iamthuypham/You-Dont-Know-Algorithm/blob/master/find_search_lv3.md)
